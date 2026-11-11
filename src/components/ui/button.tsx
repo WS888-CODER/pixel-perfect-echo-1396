@@ -9,6 +9,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        sidebar:
+          "bg-sidebar-accent text-sidebar-foreground border border-sidebar-border hover:bg-sidebar-primary/30 w-full text-xs shadow-none",
+        profile:
+          "w-full justify-start h-auto rounded-none border-t border-sidebar-border text-sidebar-foreground hover:bg-sidebar-accent p-4 text-left shadow-none",
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
