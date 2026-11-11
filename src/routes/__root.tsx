@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { DemoProvider } from "@/features/agentlens/state";
 import { AppShell } from "@/features/agentlens/shared";
+import { ThemeProvider } from "@/features/agentlens/theme";
 
 function NotFoundComponent() {
   return (
@@ -134,11 +135,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <DemoProvider>
-        <AppShell>
-          <Outlet />
-        </AppShell>
-      </DemoProvider>
+      <ThemeProvider>
+        <DemoProvider>
+          <AppShell>
+            <Outlet />
+          </AppShell>
+        </DemoProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

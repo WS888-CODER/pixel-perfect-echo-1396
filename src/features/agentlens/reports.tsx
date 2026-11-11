@@ -34,13 +34,13 @@ export function Reports() {
           <div className="inline-title">
             <Bot size={22} />
             <h2>{state.assistantName}</h2>
-            <Status tone="primary">Illustrative Demo Score</Status>
+            <Status tone="primary">Illustrative Score</Status>
           </div>
-          <p>A prototype demonstration metric — not a certified security guarantee.</p>
+          <p>Illustrative assessment metric — not a certified security guarantee.</p>
           <div className="report-score-meta">
-            <span>Simulated LLM</span>
+            <span>HR language model</span>
             <span>Version v1.2</span>
-            <span>{state.runs.length} completed demo runs</span>
+            <span>{state.runs.length} completed assessments</span>
           </div>
         </div>
         <ShieldCheck className="score-shield" size={70} />
@@ -65,7 +65,7 @@ export function Reports() {
           subtitle={
             state.runs.length
               ? "Current results from the latest simulated run"
-              : "Predefined demonstration baseline"
+              : "Reference baseline"
           }
         >
           <dl className="detail-list">
@@ -110,7 +110,7 @@ export function Reports() {
           </Status>
           <span>
             {retested
-              ? "Actual current demo rerun shown below"
+              ? "Latest assessment rerun shown below"
               : "After-fix outcomes below are illustrative until rerun"}
           </span>
         </div>
@@ -154,7 +154,7 @@ export function Reports() {
           <span>
             The tested access-control fix preserves permitted leave-policy functionality.{" "}
             {retested
-              ? "Salary access was validated in a demo rerun."
+              ? "Salary access was validated in a simulated rerun."
               : "Run the affected suite to validate the simulated fix."}
           </span>
         </div>

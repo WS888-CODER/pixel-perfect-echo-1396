@@ -22,7 +22,6 @@ import {
   ChevronDown,
   Bot,
   ShieldCheck,
-  Radio,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemo } from "./state";
@@ -48,7 +47,7 @@ const week = [
 const categories = [
   { name: "Access Control", value: 11, color: "var(--primary)" },
   { name: "Hallucination", value: 7, color: "var(--cyan)" },
-  { name: "Instruction Compliance", value: 5, color: "var(--navy)" },
+  { name: "Instruction Compliance", value: 5, color: "var(--chart-compliance)" },
   { name: "Bias", value: 2, color: "var(--warning)" },
   { name: "Accuracy", value: 2, color: "var(--chart-soft)" },
 ];
@@ -103,19 +102,6 @@ export function Overview() {
         <ExportButton />
         <AssessmentButton />
       </PageHeading>
-      <div className="overview-notice">
-        <span className="notice-symbol">
-          <ShieldCheck size={19} />
-        </span>
-        <div>
-          <strong>Confidence in every AI interaction.</strong>
-          <span> Your workspace at a glance — from evaluation to remediation.</span>
-        </div>
-        <span className="live-label">
-          <Radio size={13} />
-          Simulated data
-        </span>
-      </div>
       <div className="metrics-grid">
         {metrics.map((m) => (
           <div className={`metric-card metric-${m.tone}`} key={m.label}>
@@ -199,7 +185,7 @@ export function Overview() {
                   domain={[0, 50]}
                   ticks={[0, 10, 20, 30, 40, 50]}
                 />
-                <Tooltip />
+                <Tooltip content={<ChartTooltip />} />
                 <Area
                   isAnimationActive={false}
                   type="monotone"
@@ -249,7 +235,7 @@ export function Overview() {
                       <Cell key={c.name} fill={c.color} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip content={<ChartTooltip />} />
                 </PieChart>
               </ResponsiveContainer>
               <div className="donut-center">
@@ -311,7 +297,7 @@ export function Overview() {
             <strong>{state.assistantName}</strong>
             <span>Internal HR knowledge assistant</span>
           </div>
-          <Status>Connected (Demo)</Status>
+          <Status>Connected</Status>
           <div className="health-stat">
             <span>Last assessment</span>
             <strong>{state.runs.length ? "Just now" : "Today"}</strong>
@@ -338,5 +324,25 @@ export function Overview() {
         </div>
       </div>
     </>
+  );
+}
+
+interface ChartTooltipProps {
+  active?: boolean;
+  label?: string | number;
+  payload?: readonly { name?: string | number; value?: string | number }[];
+}
+function ChartTooltip({ active, payload, label }: ChartTooltipProps) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="chart-tooltip">
+      {label && <strong>{label}</strong>}
+      {payload.map((item, index) => (
+        <div key={index}>
+          <span>{item.name}</span>
+          <strong>{item.value}</strong>
+        </div>
+      ))}
+    </div>
   );
 }

@@ -70,7 +70,7 @@ export function FindingDetail({ id }: { id: string }) {
       <>
         <PageHeading
           title="Finding not found"
-          description="This finding does not exist in the demo workspace."
+          description="This finding does not exist in the workspace."
         />
         <Button asChild>
           <Link to="/findings">Back to Findings</Link>
@@ -87,7 +87,7 @@ export function FindingDetail({ id }: { id: string }) {
       </Link>
       <PageHeading
         title={f.title}
-        description={`${f.id} · Detected ${f.date} · Fictional demonstration evidence`}
+        description={`${f.id} · Detected ${f.date} · Evidence review`}
         eyebrow="FINDING INVESTIGATION"
       >
         <Status>{f.severity}</Status>
@@ -197,7 +197,7 @@ export function FindingDetail({ id }: { id: string }) {
             <div className="evidence-reference">
               Evidence reference:{" "}
               {salary
-                ? "DEMO-RET-024 · source relationships and retrieval logs available"
+                ? "RET-024 · source relationships and retrieval logs available"
                 : `${id}-HIST · historical simulated response; source logs unavailable`}
             </div>
           </Panel>
@@ -242,7 +242,9 @@ export function FindingDetail({ id }: { id: string }) {
         <div>
           <Panel
             title="Data Lineage"
-            subtitle={salary ? "Confirmed within the demo scenario" : "Source lineage unavailable"}
+            subtitle={
+              salary ? "Confirmed from available source logs" : "Source lineage unavailable"
+            }
           >
             {salary ? (
               <>
@@ -267,7 +269,7 @@ export function FindingDetail({ id }: { id: string }) {
                     <Bot />
                     <span>
                       <strong>HR Assistant Retrieved Context</strong>
-                      <small>DEMO-RET-024 · logged retrieval</small>
+                      <small>RET-024 · logged retrieval</small>
                     </span>
                   </div>
                   <ArrowDown className="lineage-arrow" />
@@ -279,7 +281,7 @@ export function FindingDetail({ id }: { id: string }) {
                     </span>
                   </div>
                 </div>
-                <Status tone="primary">Demo source logs available</Status>
+                <Status tone="primary">Source logs available</Status>
               </>
             ) : (
               <div className="empty-state">
@@ -291,8 +293,8 @@ export function FindingDetail({ id }: { id: string }) {
             )}
             <p className="lineage-note">
               In a real deployment, source tracing depends on the assistant’s retrieval and
-              document-access logs. The displayed relationship is confirmed only in this logged demo
-              scenario.
+              document-access logs. The displayed relationship is confirmed only in this logged
+              simulated scenario.
             </p>
           </Panel>
           <div className="scope-note">
@@ -314,7 +316,7 @@ export function FindingDetail({ id }: { id: string }) {
           </DialogDescription>
           <div className="notice">
             <ShieldCheck />
-            This changes only local demo state. No real company system will be modified.
+            This changes only local prototype state. No real company system will be modified.
           </div>
           <p className="text-sm text-muted-foreground">
             The salary-access scenario will pass on rerun. Permitted leave-policy access will remain

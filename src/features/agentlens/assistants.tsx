@@ -39,7 +39,7 @@ export function Assistants() {
           <div className="grow">
             <div className="inline-title">
               <h2>{state.assistantName}</h2>
-              <Status>Connected (Demo)</Status>
+              <Status>Connected</Status>
             </div>
             <p>
               An internal HR assistant that answers employee questions using organizational
@@ -47,7 +47,7 @@ export function Assistants() {
             </p>
             <div className="assistant-facts">
               <span>
-                Model <strong>Simulated LLM</strong>
+                Model <strong>HR language model</strong>
               </span>
               <span>
                 Version <strong>v1.2</strong>
@@ -65,9 +65,6 @@ export function Assistants() {
           </div>
         </div>
         <div className="panel-toolbar">
-          <span className="text-muted-foreground text-sm">
-            Fictional assistant · no live model connected
-          </span>
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => setModal("details")}>
               View Details
@@ -120,7 +117,7 @@ export function Assistants() {
             <FileText />
             <div>
               <strong>Employee Leave Policy.pdf</strong>
-              <span>Approved HR policy · fictional</span>
+              <span>Approved HR policy</span>
             </div>
             <Status tone="neutral">Public/Internal</Status>
           </div>
@@ -141,9 +138,7 @@ export function Assistants() {
             <div>
               <strong>Department Expense Summary.pdf</strong>
               <span>
-                {state.fixed
-                  ? "Restricted access inherited (simulated)"
-                  : "Permission inheritance missing"}
+                {state.fixed ? "Restricted access inherited" : "Permission inheritance missing"}
               </span>
             </div>
             <Status tone={state.fixed ? "danger" : "warning"}>
@@ -157,23 +152,23 @@ export function Assistants() {
             </span>
           </div>
         </Panel>
-        <Panel title="Integration" subtitle="Simulated connection configuration">
+        <Panel title="Integration" subtitle="Connection configuration">
           <div className="integration-mark">
             <Cable size={30} />
-            <Status>Connected (Demo)</Status>
+            <Status>Connected</Status>
           </div>
           <dl className="detail-list">
             <div>
               <dt>API endpoint</dt>
-              <dd>Demo Integration</dd>
+              <dd>HR Assistant Connector</dd>
             </div>
             <div>
               <dt>Connection status</dt>
-              <dd>Connected (Simulated)</dd>
+              <dd>Local adapter</dd>
             </div>
             <div>
               <dt>Authentication</dt>
-              <dd>API Key (Demo)</dd>
+              <dd>Not configured</dd>
             </div>
             <div>
               <dt>Last sync</dt>
@@ -193,7 +188,7 @@ export function Assistants() {
               ? "Configure Assistant"
               : modal === "details"
                 ? state.assistantName
-                : "Demo Integration"}
+                : "HR Assistant Connector"}
           </DialogTitle>
           <DialogDescription>
             Fictional local simulation; no external system is connected.
@@ -204,7 +199,7 @@ export function Assistants() {
                 e.preventDefault();
                 update((s) => ({ ...s, assistantName: name.trim() || "HR Assistant" }));
                 setModal("");
-                toast.success("Demo assistant configuration saved");
+                toast.success("Assistant configuration saved");
               }}
             >
               <label className="form-label">
@@ -218,7 +213,7 @@ export function Assistants() {
               <dl className="detail-list">
                 <div>
                   <dt>Version</dt>
-                  <dd>v1.2 · simulated</dd>
+                  <dd>v1.2</dd>
                 </div>
                 <div>
                   <dt>Sources / roles</dt>
@@ -226,7 +221,7 @@ export function Assistants() {
                 </div>
                 <div>
                   <dt>Assessment history</dt>
-                  <dd>{state.runs.length} executed demo runs</dd>
+                  <dd>{state.runs.length} completed assessments</dd>
                 </div>
               </dl>
               <Button asChild onClick={() => setModal("")}>
@@ -240,7 +235,7 @@ export function Assistants() {
               </div>
               <label className="form-label">
                 Connection name
-                <input value="Demo Integration" readOnly />
+                <input value="HR Assistant Connector" readOnly />
               </label>
               <Button
                 onClick={() => {
@@ -248,7 +243,7 @@ export function Assistants() {
                   toast.success("Simulated connection verified");
                 }}
               >
-                Verify Demo Connection
+                Verify Connection
               </Button>
             </>
           )}

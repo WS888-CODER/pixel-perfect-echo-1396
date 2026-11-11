@@ -24,12 +24,15 @@ import {
   Play,
   Check,
   Plus,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Toaster } from "@/components/ui/sonner";
 import { useDemo } from "./state";
 import { buildReport, findings, salaryFindingStatus } from "./demo";
+import { useTheme } from "./theme";
 
 const nav = [
   { name: "Overview", path: "/dashboard", icon: LayoutDashboard },
@@ -46,6 +49,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState(false);
   const [search, setSearch] = useState("");
   const { state, hydrated } = useDemo();
+  const { theme, ready, toggle } = useTheme();
   const current =
     nav.find((n) => n.path === path || (n.path === "/findings" && path.startsWith("/findings/")))
       ?.name ??
@@ -68,7 +72,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="workspace-icon">A</div>
           <div>
             <strong>Acme Organization</strong>
-            <span>Demo workspace</span>
+            <span>Enterprise workspace</span>
           </div>
           <ChevronDown size={14} />
         </div>
@@ -185,10 +189,16 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </div>
               )}
             </div>
-            <span className="demo-pill">
-              <span />
-              Demo environment
-            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              disabled={!ready}
+              onClick={toggle}
+              aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
+            </Button>
             <div className="topbar-divider" />
             <Button
               variant="ghost"
@@ -216,14 +226,13 @@ export function AppShell({ children }: { children: ReactNode }) {
             <ShieldCheck size={14} />
             AgentLens · Test. Detect. Prove. Improve.
           </span>
-          <span>All data and assessments are simulated.</span>
         </footer>
       </div>
       <Toaster position="bottom-right" />
       <Dialog open={notifications} onOpenChange={setNotifications}>
         <DialogContent>
           <DialogTitle>Workspace notifications</DialogTitle>
-          <DialogDescription>Fictional demo activity</DialogDescription>
+          <DialogDescription>Recent assessment activity</DialogDescription>
           <div className="notice">
             <ShieldAlert />
             AL-024 ·{" "}
@@ -247,7 +256,6 @@ export function AppShell({ children }: { children: ReactNode }) {
           <DialogDescription>
             Fictional workspace administrator · Acme Organization
           </DialogDescription>
-          <p>Demo session · no authentication or real account is connected.</p>
           <Button asChild onClick={() => setProfile(false)}>
             <Link to="/settings">Workspace settings</Link>
           </Button>
@@ -282,7 +290,7 @@ export function Status({ children, tone }: { children: ReactNode; tone?: string 
   const text = typeof children === "string" ? children : "";
   const resolvedTone =
     tone ??
-    (["Passed", "Resolved", "Connected (Demo)", "Completed"].includes(text)
+    (["Passed", "Resolved", "Connected", "Completed"].includes(text)
       ? "success"
       : ["Critical", "Failed"].includes(text)
         ? "danger"

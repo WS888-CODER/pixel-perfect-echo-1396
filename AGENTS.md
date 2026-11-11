@@ -33,3 +33,4 @@ use the editor.
 - Use TanStack file routes for navigation and a shared root shell; this preserves the template's supported routing and SSR.
 - Keep fictional demo entities and deterministic assessment logic in a browser-safe service, with a React context persisting state after hydration; all pages must read one consistent demo state.
 - Keep assessment exports client-side and printable; the prototype must not require a live integration or server credentials.
+- Keep theme preference in a separate client-side provider and apply semantic tokens on the document root after hydration; theme changes and workspace resets must not affect one another.

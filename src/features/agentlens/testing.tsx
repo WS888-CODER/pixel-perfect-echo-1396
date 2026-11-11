@@ -200,7 +200,7 @@ export function TestSuites() {
                 ],
               }));
               setAdding(false);
-              toast.success("Test case added to the demo suite");
+              toast.success("Test case added to the suite");
             }}
           >
             <label className="form-label">
@@ -301,7 +301,7 @@ export function TestRuns() {
   return (
     <>
       <PageHeading title="Test Runs" description="Execute and monitor AI assistant evaluations." />
-      <Panel title="New Assessment" subtitle="Configure the scope of your simulated evaluation">
+      <Panel title="New Assessment" subtitle="Configure your evaluation scope">
         <div className="run-config">
           <SelectField
             label="Assistant"
@@ -338,10 +338,7 @@ export function TestRuns() {
         </div>
       </Panel>
       {running && (
-        <Panel
-          title="Assessment in Progress"
-          subtitle="Executing predefined demonstration scenarios"
-        >
+        <Panel title="Assessment in Progress" subtitle="Evaluating the selected scenarios">
           <div className="progress-heading">
             <span>Testing approved sources and access policies</span>
             <strong>{progress}%</strong>
